@@ -1,24 +1,38 @@
-// Last updated: 4/18/2025, 3:26:27 PM
+// Last updated: 4/18/2025, 6:59:56 PM
 class Solution {
 public:
-    string longestCommonPrefix(vector<string>& strs) {
-        // Sort the vector of string
-        sort (strs.begin(), strs.end());
+    int romanToInt(string s) {
+            
+            
+                
+        int total = 0;
 
-        // Compare the first and last strings in the sort list
-        string first = strs.front();
-        string last = strs.back();
-
-        int minLength = min(first.size(), last.size());
-
-        int i =0;
-
-        // Find the common prefix between the first and last strings
-        while (i < minLength && first[i] == last[i]) {
-            i++;
+        // Create an unordered_map
+        unordered_map<char, int> map;
+        
+        // Insert key-value pairs into the unordered_map
+        map['I'] = 1;
+        map['V'] = 5;
+        map['X'] = 10;
+        map['L'] = 50;
+        map['C'] = 100;
+        map['D'] = 500;
+        map['M'] = 1000;
+        
+        for (int i=0; i<s.length(); i++) {
+        
+                    
+            if (map[s[i]] < map[s[i+1]]) {
+                total -= map[s[i]];	// If the current num smaller than the next num (IV = 5 - 1)
+                //cout << total << endl;;
+            } else {
+                total += map[s[i]];	// Add otherwise
+                //cout << total << endl;
+            }
+            
+            // cout << prev << endl;
         }
+        return total;
 
-        // return the common prefix
-        return first.substr(0,i);
     }
 };
