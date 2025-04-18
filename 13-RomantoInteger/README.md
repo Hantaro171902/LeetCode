@@ -51,3 +51,35 @@ Constraints:
 	s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').
 	It is guaranteed that s is a valid roman numeral in the range [1, 3999].
 
+# 🧠 Algorithm Idea
+- Using a loop
+- Using a Map to store the value of Roman into Integer
+- Compare the current value with the next value [if smaller (-), if bigger (+)]
+- Store in a total variable and print it
+
+# ✅ Solution
+1. Using unordered_map
+
+```unordered_map``` is a built-in C++ Standard Library container that stores key-value pairs and allows fast lookups, insertion, and deletion using hashing (just like a HashMap in Java).
+
+```c++
+	unordered_map<char, int> map;
+	
+	// Insert key-value pairs into the unordered_map
+	map['I'] = 1;
+	map['V'] = 5;
+	map['X'] = 10;
+	map['L'] = 50;
+	map['C'] = 100;
+	map['D'] = 500;
+	map['M'] = 1000;
+```
+
+2. Time Complexity:
+
+Insert / Access / Delete: Average case O(1)
+
+
+
+
+
