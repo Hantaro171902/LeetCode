@@ -1,23 +1,20 @@
-// Last updated: 4/19/2025, 10:19:41 PM
+// Last updated: 4/19/2025, 11:01:30 PM
 class Solution {
 public:
-    int removeDuplicates(vector<int>& nums) {
-            
+    int removeElement(vector<int>& nums, int val) {
         if (nums.empty()) return 0;
-        
-        int k = 1;
-        for (int i = 1; i < nums.size(); i++) {
-            if (nums[i] != nums[i-1]) {
-                nums[k] = nums[i]; 	// overwrite the unique value in k
-                k++;
-                
-                // cout << k << " ";
+	
+        int k = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] != val) {
+                nums[k++] = nums[i]; 	
+    //			cout << k << endl;
             } 
     //		else {
-    //			cout << k << " ";
+    //			nums.erase(remove(nums.begin(), nums.end(), i), nums.end());
+    //			cout << i << endl;
     //		}
         }
         return k;
     }
-
 };
