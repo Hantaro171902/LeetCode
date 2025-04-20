@@ -29,4 +29,45 @@ Constraints:
 	-104 <= nums[i] <= 104
 	nums contains distinct values sorted in ascending order.
 	-104 <= target <= 104
+===
+# 🧠 Ideas
+- Sort the input in order
+- Find the insert position
+- Print out the output
+
+# ✅ Solution
+1. Function searchInsert()
+
+```c++
+int searchInsert(vector<int>& nums, int target) {
+	int k = 1;
+	
+	sort(nums.begin(), nums.end());
+	
+	for (int i=0; i<nums.size(); i++) {
+		if (nums[i] >= target) 
+			return i;		
+	}
+	return nums.size();
+}
+```
+2. Function printOutput()
+
+In C++, the vector insert() is a built-in function used to insert new elements at the given position in a vector. In this article, we will learn about the vector insert() function in C++.
+[GreekforGreek](https://www.geeksforgeeks.org/vector-insert-function-in-cpp-stl/)
+
+```c++
+void printOutput(vector<int>& nums, int target) {
+	int insertPos = searchInsert(nums, target);
+	
+	// Insert at correct posistion
+	nums.insert(nums.begin() + insertPos, target);
+	
+	// Print in order
+	for (int i=0; i<nums.size(); i++) {
+		cout << nums[i] << " ";
+	}
+}
+
+```
 
