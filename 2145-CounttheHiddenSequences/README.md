@@ -54,3 +54,100 @@ Constraints:
 	-105 <= differences[i] <= 105
 	-105 <= lower <= upper <= 105
 
+# 💡 Strategy
+
+Let’s say the hidden sequence starts with some value ```x```. Then the rest of the sequence is:
+
+```c++
+x,
+x + differences[0],
+x + differences[0] + differences[1],
+...
+
+```
+
+That means each element is:
+```c++
+a[i] = x + prefix_sum[i]
+```
+- ```prefix_sum[i]``` is the sum of differences from index 0 up to i - 1 in the differences array.
+
+```c++
+prefix_sum[i] = differences[0] + differences[1] + ... + differences[i - 1]
+```
+It represents how much we have to add or subtract from the first value ```x``` to get the value at position ```i```.
+
+So, the full hidden sequence looks like:
+
+| i |	Formula |	Value |
+|---|-----------|-------------|
+| 0 |	a[0] = x |	Starting value |
+| 1 |	a[1] = x + differences[0] |	x + prefix_sum[1] |
+| 2 |	a[2] = x + differences[0] + differences[1] |	x + prefix_sum[2] |
+| 3 |	a[3] = x + differences[0] + differences[1] + differences[2] |	x + prefix_sum[3] |
+
+# 🧾 Example
+
+```c++
+differences = [1, -3, 4]
+```
+We build the prefix sums step by step:
+
+- prefix_sum[0] = 0 (no difference yet)
+- prefix_sum[1] = 1 (just differences[0])
+- prefix_sum[2] = 1 + (-3) = -2
+- prefix_sum[3] = -2 + 4 = 2
+
+So:
+- a[0] = x
+- a[1] = x + 1
+- a[2] = x - 2
+- a[3] = x + 2
+
+Each element is just the first value plus the total of the differences up to that point.
+<hr>
+
+To ensure all values in the sequence stay within [lower, upper], we need:
+
+```c++
+lower ≤ x + prefix_sum[i] ≤ upper
+=> lower - prefix_sum[i] ≤ x ≤ upper - prefix_sum[i]
+```
+
+# 🧠 Final Formula 
+Let:
+
+
+- min_prefix_sum = minimum prefix sum (can be negative)
+- max_prefix_sum = maximum prefix sum
+
+Then the valid range for x is:
+
+```c++
+[lower - min_prefix_sum, upper - max_prefix_sum]
+```
+
+And the count of valid starting values is:
+
+```c++
+max(0, (upper - max_prefix_sum) - (lower - min_prefix_sum) + 1)
+```
+
+# ✅ Solution
+
+```c++
+int numberOfArrays(vector<int>& differences, int lower, int upper) {
+    long long int prefix = 0, minPrefix = 0, maxPrefix = 0;
+    
+    for (int i : differences) {
+    	prefix += i;
+    	minPrefix = min(minPrefix, prefix);
+    	maxPrefix = max(maxPrefix, prefix);
+	}
+	
+	long long int minStart = lower - minPrefix;
+	long long int maxStart = upper - maxPrefix;
+	
+	return max(0LL, maxStart - minStart + 1);
+}
+```
