@@ -27,8 +27,6 @@ Explanation: The array consists only of the integer 5, so any subarray is comple
 ### ✅ In an array of size n, the number of contiguous non-empty subarrays is:
 
 $`\frac{ n * (n + 1)} { 2} `$ 
- 
-In this case, n = 4:
 
 ### 🔢 Complete Subarrays:
 
