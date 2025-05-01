@@ -27,3 +27,62 @@ Constraints:
 	1 <= nums[i] <= 106
 	1 <= k <= 105
 
+## ✅ Approach: Sliding Window
+
+Let’s break down the steps:
+- Find the maximum element in the array `(maxVal)`.
+- Use a sliding window with two pointers `left` and `right`.
+- Move `right` to expand the window.
+- Keep track of how many times `maxVal` appears in the current window.
+- If it appears at least `k` times, all subarrays from `left` to `right` are valid.
+- Shrink the window from the left to find all valid subarrays.
+
+## 🧠 Key Insight
+
+Once a subarray `[left, right]` contains k instances of maxVal, every subarray starting at `left...right` and ending at `right...n-1` will be valid.
+So we can count `n - right` subarrays starting at `left`.
+
+## ⚡ Time complexity
+`O(n)`: each element is visited at most twice (once by right, once by `left`).
+
+## ☑️ Code 
+```c++
+
+long long countSubarrays(vector<int>& nums, int k) {
+	
+    int n = nums.size();
+    int maxVal = *max_element(nums.begin(), nums.end());
+    long long result = 0;
+
+    const int MAX_PRINT = 1000; // Prevent printing too many
+    int printCount = 0;
+
+    for (int start = 0; start < n; start++) {
+        int maxFreq = 0;
+        for (int end = start; end < n; end++) {
+            if (nums[end] == maxVal) maxFreq++;
+
+            if (maxFreq >= k) {
+                result++;
+
+                if (printCount < MAX_PRINT) {
+                    // Print subarray or its indices
+                    cout << "Subarray [" << start << "-" << end << "]: ";
+                    for (int i = start; i <= end; i++) {
+                        cout << nums[i] << ", ";
+                    }
+                    cout << "\n";
+                    printCount++;
+                }
+            }
+        }
+    }
+
+    if (printCount >= MAX_PRINT) {
+        cout << "...(truncated printing after " << MAX_PRINT << " subarrays)\n";
+    }
+
+    return result;
+}
+
+```
