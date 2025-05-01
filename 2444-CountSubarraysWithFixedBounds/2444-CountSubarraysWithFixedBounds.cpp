@@ -1,14 +1,17 @@
-// Last updated: 5/1/2025, 7:41:42 PM
+// Last updated: 5/1/2025, 9:00:11 PM
 class Solution {
 public:
-    long long countSubarrays(vector<int>& nums, int minK, int maxK) {
-        long count = 0, start = -1, mini = -1, maxi = -1;
-        for (int i = 0; i < nums.size(); i++) {
-            if (nums[i] < minK || nums[i] > maxK) start = i;
-            if (nums[i] == maxK) maxi = i;
-            if (nums[i] == minK) mini = i;
-            int valid = max(0L, min(mini, maxi) - start);
-            count += valid;
+    int countSubarrays(vector<int>& nums) {
+        int n = nums.size();
+        int count = 0;
+        
+        for (int i = 1; i < n - 1; i++) {
+            // middle = nums[i], check if sum of first and third == half of middle
+            int first = nums[i - 1], middle = nums[i], third = nums[i + 1];
+            if (middle % 2 == 0 && (first + third) * 2 == middle) {
+                cout << "[" << first << "," << middle << "," << third << "]\n";
+                count++;
+            }
         }
         return count;
     }
