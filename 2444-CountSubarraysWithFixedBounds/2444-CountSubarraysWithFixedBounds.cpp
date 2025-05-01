@@ -1,4 +1,4 @@
-// Last updated: 5/1/2025, 9:00:11 PM
+// Last updated: 5/1/2025, 9:01:20 PM
 class Solution {
 public:
     int countSubarrays(vector<int>& nums) {
@@ -9,7 +9,7 @@ public:
             // middle = nums[i], check if sum of first and third == half of middle
             int first = nums[i - 1], middle = nums[i], third = nums[i + 1];
             if (middle % 2 == 0 && (first + third) * 2 == middle) {
-                cout << "[" << first << "," << middle << "," << third << "]\n";
+                // cout << "[" << first << "," << middle << "," << third << "]\n";
                 count++;
             }
         }
