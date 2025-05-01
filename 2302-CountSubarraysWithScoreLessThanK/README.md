@@ -41,3 +41,34 @@ Constraints:
 	1 <= nums[i] <= 105
 	1 <= k <= 1015
 
+## ✅ Approach: Using sliding window 
+- Start with an empty window.
+- Expand the window to include more elements.
+- If the score becomes too large `(sum * length >= k)`, shrink the window from the left.
+- Count the number of valid subarrays ending at each index.
+
+## 🧮 Score Definition
+The **score** of a subarray is calculated as: `score = sum(subarray) × length(subarray)`
+
+## ⚡ Time Complexity
+- Time Complexity: `O(n)`
+- Space Complexity: `O(1)` (excluding input vector)
+
+## ☑️ Code 
+```c++
+
+long long countSubarrays(vector<int>& nums, long long k) {
+	int n = nums.size();
+        long long count = 0, total = 0;
+        for (int i = 0, j = 0; j < n; j++) {
+            total += nums[j];
+            while (i <= j && total * (j - i + 1) >= k) {
+                total -= nums[i];
+                i++;
+            }
+            count += j - i + 1;
+        }
+    return count;
+}
+```
+
