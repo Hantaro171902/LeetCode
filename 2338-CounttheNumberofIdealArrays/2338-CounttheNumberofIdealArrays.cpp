@@ -1,4 +1,4 @@
-// Last updated: 5/1/2025, 4:44:17 PM
+// Last updated: 5/1/2025, 7:35:33 PM
 const int MOD = 1e9 + 7, MAX_N = 1e4 + 10,
           MAX_P = 15;  // There are up to 15 prime factors
 int c[MAX_N + MAX_P][MAX_P + 1];
