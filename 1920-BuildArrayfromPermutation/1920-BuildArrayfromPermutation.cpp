@@ -1,11 +1,14 @@
-// Last updated: 5/6/2025, 10:13:30 PM
+// Last updated: 5/28/2025, 11:01:34 PM
 class Solution {
 public:
     vector<int> buildArray(vector<int>& nums) {
-        vector<int> ans(nums.size(), 0);
-        for (int i = 0; i < nums.size(); i++) {
-            ans[i] = nums[nums[i]];
+        int n = nums.size();
+        vector<int> result(n);
+        
+        for (int i = 0; i < n; i++) {
+            result[i] = nums[nums[i]];
         }
-        return ans;
+        
+        return result;
     }
 };
