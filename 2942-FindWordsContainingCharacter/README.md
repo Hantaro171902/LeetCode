@@ -35,3 +35,15 @@ Constraints:
 	x is a lowercase English letter.
 	words[i] consists only of lowercase English letters.
 
+
+
+- **Purpose**: This function scans each word in the input list to see if it contains the character `x`.
+- **Logic**:
+  ```cpp
+  for (int i = 0; i < words.size(); ++i) {
+      if (words[i].find(x) != string::npos) {
+          result.push_back(i);
+      }
+  }
+  ```
+
