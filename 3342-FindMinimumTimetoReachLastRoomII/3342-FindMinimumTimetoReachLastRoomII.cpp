@@ -1,4 +1,4 @@
-// Last updated: 6/13/2025, 4:37:51 PM
+// Last updated: 6/13/2025, 4:45:09 PM
 class Solution {
 public:
     int minTimeToReach(vector<vector<int>>& moveTime) {
