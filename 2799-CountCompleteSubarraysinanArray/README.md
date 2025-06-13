@@ -52,7 +52,7 @@ Given an array of positive integers, count the number of complete subarrays, whe
 - For each subarray, use a ```set``` to track its distinct elements.
 - If the subarray contains exactly ```k``` distinct elements, it is considered complete, so we increment our result counter.
 
-##⚡Time Complexity
+## ⚡Time Complexity
 - ```O(n²)```: Two nested loops to generate all subarrays.
 - ```O(n)``` per subarray (in the worst case) to maintain the set of distinct elements.
 So, total complexity is ```O(n³)``` in the worst case. Acceptable for small n.
