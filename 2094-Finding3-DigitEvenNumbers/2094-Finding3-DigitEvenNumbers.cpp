@@ -1,28 +1,33 @@
-// Last updated: 5/13/2025, 9:24:27 PM
+// Last updated: 6/23/2025, 4:14:15 PM
 class Solution {
 public:
     vector<int> findEvenNumbers(vector<int>& digits) {
-         vector<int> mpp(10, 0);
-        for (int i = 0; i < digits.size(); i++)
-            mpp[digits[i]]++;
+        vector<int> freq(10, 0);
+        for (int d : digits) freq[d]++;
 
-        vector<int> res;
-        for (int i = 1; i <= 9; i++) {
-            if (mpp[i] == 0) continue;
-            mpp[i]--;
+        vector<int> result;
 
-            for (int j = 0; j <= 9; j++) {
-                if (mpp[j] == 0) continue;
-                mpp[j]--;
-                for (int k = 0; k <= 8; k += 2) {
-                    if (mpp[k] == 0) continue;
-                    res.push_back(i*100 + j*10 + k);
+        for (int num = 100; num <= 999; num += 2) { // only even numbers
+            int d1 = num / 100;
+            int d2 = (num / 10) % 10;
+            int d3 = num % 10;
+
+            vector<int> tempFreq(10, 0);
+            tempFreq[d1]++;
+            tempFreq[d2]++;
+            tempFreq[d3]++;
+
+            bool valid = true;
+            for (int i = 0; i < 10; ++i) {
+                if (tempFreq[i] > freq[i]) {
+                    valid = false;
+                    break;
                 }
-                mpp[j]++;
-
             }
-            mpp[i]++;
+
+            if (valid) result.push_back(num);
         }
-        return res;
+
+        return result;
     }
 };
