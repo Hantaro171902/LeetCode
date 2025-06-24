@@ -43,3 +43,103 @@ Constraints:
 	3 <= digits.length <= 100
 	0 <= digits[i] <= 9
 
+# ❕Requirements
+- The number must be **three digits**
+- No **leading zero** (e.g., `012` is not valid).
+- The number must be **even** (last digit must be 0, 2, 4, 6, 8).
+- Use only unique combinations of indices: no repeat.
+- The digits **may contain duplicates**, but you only return **unique numbers**.
+
+# 🧠 Approach
+This code use **brute-force generation** of all possible 3-digit numbers using 3 different indices from the input array.
+
+## Step 1: Base Case and Sort
+```c++
+if (digits.size() < 3) return result;
+sort(digits.begin(), digits.end());
+```
+- If there are fewer than 3 digits, it's impossible to form a 3-digit number.
+- Sorting helps produce results in **increasing order** later.
+
+## Step 2: Triple Nested Loop
+```c++
+for (int i = 0; i < n; ++i) {
+	if (digits[i] == 0) continue; // Skip leading zero
+	for (int j = 0; j < n; ++j) {
+		if (i == j) continue;
+		for (int k = 0; k < n; ++k) {
+			if (i != j && i != k && j != k) {
+```
+This part iterates over **every combination of three different indices** `(i, j, k)` from the input digits.
+
+## Step 3: Filter Invalid Cases
+``` c++
+int a = digits[i];
+int b = digits[j];
+int c = digits[k];
+```
+Then it checks:
+- ✅ `a` should not be zero (no leading zero).
+- ✅ `c` (last digit) should be even.
+
+## Step 4: Add Valid Number
+```c++
+int number = a * 100 + b * 10 + c;
+result.push_back(number);
+```
+
+## Step 5: Sort and Return
+```c++
+sort(result.begin(), result.end());
+return result;
+```
+Sorts the resulting number and returns them. Note that **duplicates are not removed**, which can be improved.
+
+# ⚡ Time & Space Complexity
+| Complexity | Discription |
+| --- | --- |
+| Time | O(n³ + n log n) |
+| Space | O(n³) in the worst case |
+
+# ☑️ Code
+```c++
+vector<int> findEvenNumbers(vector<int>& digits) {
+	vector<int> result;
+	
+	int n = digits.size();
+	if (n < 3) return result; // Not enough digits to form a 3-digit number
+	sort(digits.begin(), digits.end());
+
+	for (int i = 0; i < n; ++i) {
+		if (digits[i] == 0) continue; // Skip leading zero
+		for (int j = 0; j < n; ++j) {
+			if (i == j) continue;
+			for (int k = 0; k < n; ++k) {
+				// Make sure indices are not the same
+				if (i != j && i != k && j != k) {
+					int a = digits[i];
+					int b = digits[j];
+					int c = digits[k];
+
+					// Leading zero check
+					if (a == 0) continue;
+
+					// Check even number
+					if (c % 2 != 0) continue;
+
+					int number = a * 100 + b * 10 + c;
+					result.push_back(number);
+				}
+			}
+		}
+	}
+
+	sort(result.begin(), result.end());
+	return result;
+}
+```
+
+# ✅ Result 
+![image](https://github.com/user-attachments/assets/2177c3b1-d92f-4094-8938-28a551fd00bd)
+
+
