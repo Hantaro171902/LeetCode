@@ -47,4 +47,40 @@ Constraints:
 	0 <= nums[i] <= 50
 	0 <= indexDifference <= 100
 	0 <= valueDifference <= 50
+---
+# 💡 Approach
+
+1. Iterate through all possible pairs `(i, j)` including cases where `i == j`.
+2. For each pair:
+- Check if `abs(i - j) >= indexDifference`.
+- Check if `abs(nums[i] - nums[j]) >= valueDifference`.
+3. If both conditions are satisfied, return `[i, j]` immediately.
+4. If no valid pair is found after scanning all possibilities, return `[-1, -1]`.
+
+Since `n <= 100`, a simple brute force O(n²) approach is efficient enough.
+
+---
+⏱️ Complexity
+- Time Complexity: `O(n²)`
+- Space Complexity: `O(1)`
+
+---
+# ☑️ Code 
+```c++
+
+vector<int> findIndices(vector<int>& nums, int indexDifference, int valueDifference) {
+	int n = nums.size();
+    for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (abs(i - j) >= indexDifference &&
+				abs(nums[i] - nums[j]) >= valueDifference) {
+				return {i, j};
+			}
+		}
+	}
+	return {-1, -1};
+}
+
+```
+
 
