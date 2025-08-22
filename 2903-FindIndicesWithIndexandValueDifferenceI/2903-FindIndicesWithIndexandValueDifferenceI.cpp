@@ -1,4 +1,4 @@
-// Last updated: 8/22/2025, 9:56:03 PM
+// Last updated: 8/22/2025, 9:56:10 PM
 class Solution {
 public:
     vector<int> findIndices(vector<int>& nums, int indexDifference, int valueDifference) {
